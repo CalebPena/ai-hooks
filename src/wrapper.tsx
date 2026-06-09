@@ -8,6 +8,11 @@ const AiContext = createContext<{
   removeHook: (id: Id) => void;
 } | null>(null);
 
+const disabledContextValue = {
+  addHook: () => {},
+  removeHook: () => {},
+};
+
 export function AiProvider({
   children,
   config,
@@ -18,7 +23,11 @@ export function AiProvider({
   disabled?: boolean;
 }) {
   if (disabled) {
-    return children;
+    return (
+      <AiContext.Provider value={disabledContextValue}>
+        {children}
+      </AiContext.Provider>
+    );
   }
 
   return <EnabledAiProvider config={config}>{children}</EnabledAiProvider>;

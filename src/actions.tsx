@@ -11,7 +11,7 @@ export function useAiAction(config: Omit<Config, "group">) {
   useEffect(() => {
     const finalConfig = {
       ...config,
-      group: group,
+      group,
     };
 
     addHook(id, finalConfig);

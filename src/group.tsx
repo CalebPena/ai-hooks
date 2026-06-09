@@ -1,17 +1,25 @@
-import { createContext, useContext, useEffect, useId, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useId,
+  type ComponentPropsWithoutRef,
+} from "react";
 import type { Config, Id } from "./types";
 import { useAi } from "./wrapper";
 import z from "zod";
 
 const GroupContext = createContext<Id | null>(null);
 
+type AiGroupProps = Omit<ComponentPropsWithoutRef<"div">, "id"> & {
+  config: Pick<Config, "name" | "description">;
+};
+
 export function AiGroup({
   children,
   config,
-}: {
-  children: ReactNode;
-  config: Pick<Config, "name" | "description">;
-}) {
+  ...divProps
+}: AiGroupProps) {
   const { addHook, removeHook } = useAi();
   const group = useAiGroup();
   const id = useId();
@@ -38,7 +46,7 @@ export function AiGroup({
 
   return (
     <GroupContext.Provider value={id}>
-      <div id={id}>{children}</div>
+      <div {...divProps} id={id}>{children}</div>
     </GroupContext.Provider>
   );
 }
