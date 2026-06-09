@@ -1,0 +1,34 @@
+{
+  "name": "@browser-agent/ai-hooks",
+  "version": "0.1.0",
+  "description": "React primitives for exposing app actions to AI agents.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "zod": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "typescript": "latest",
+    "zod": "latest"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
